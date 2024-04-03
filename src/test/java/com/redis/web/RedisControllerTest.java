@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -23,6 +25,7 @@ import com.redis.service.RedisService;
 @WebMvcTest(controllers=RedisController.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class RedisControllerTest {
+	private static final Logger LOGGER = LoggerFactory.getLogger(RedisControllerTest.class);
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -45,6 +48,7 @@ class RedisControllerTest {
 						MockHttpServletResponse response = result.getResponse();
 						String res = response.getContentAsString();
 						
+						LOGGER.debug(res);
 						assertTrue(res.contains(RedisAttr.SUCCESS.normalCase()));
 					});
 		} catch (Exception e) {
@@ -66,6 +70,7 @@ class RedisControllerTest {
 						MockHttpServletResponse response = result.getResponse();
 						String res = response.getContentAsString();
 						
+						LOGGER.debug(res);
 						assertTrue(res.contains(RedisAttr.SUCCESS.normalCase()));
 					});
 		} catch (Exception e) {
@@ -88,6 +93,7 @@ class RedisControllerTest {
 						MockHttpServletResponse response = result.getResponse();
 						String res = response.getContentAsString();
 						
+						LOGGER.debug(res);
 						assertTrue(res.contains(RedisAttr.SUCCESS.normalCase()));
 					});
 		} catch (Exception e) {
@@ -109,6 +115,7 @@ class RedisControllerTest {
 						MockHttpServletResponse response = result.getResponse();
 						String res = response.getContentAsString();
 						
+						LOGGER.debug(res);
 						assertTrue(res.contains(RedisAttr.SUCCESS.normalCase()));
 					});
 		} catch (Exception e) {
@@ -131,6 +138,7 @@ class RedisControllerTest {
 						MockHttpServletResponse response = result.getResponse();
 						String res = response.getContentAsString();
 						
+						LOGGER.debug(res);
 						assertTrue(res.contains(RedisAttr.SUCCESS.normalCase()));
 					});
 		} catch (Exception e) {
@@ -153,6 +161,7 @@ class RedisControllerTest {
 						MockHttpServletResponse response = result.getResponse();
 						String res = response.getContentAsString();
 						
+						LOGGER.debug(res);
 						assertTrue(res.contains(RedisAttr.SUCCESS.normalCase()));
 					});
 		} catch (Exception e) {

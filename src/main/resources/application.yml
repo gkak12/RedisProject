@@ -1,3 +1,6 @@
 spring:
   redis:    host: 192.168.0.8
     port: 6379
+    
+logging:  file:
+    path: D:\\workspace\\RedisProject\\logs    name: redisLog
