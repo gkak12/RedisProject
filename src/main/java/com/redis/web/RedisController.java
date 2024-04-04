@@ -25,7 +25,7 @@ public class RedisController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(RedisController.class);
 	
-	@Resource(name = "RedisServiceImp")
+	@Resource(name = "RedisService")
 	private RedisService redisService;
 	
 	@PostMapping(value = "/setString")
