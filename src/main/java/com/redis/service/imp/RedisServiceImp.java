@@ -9,30 +9,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import com.redis.common.RedisHashDto;
-import com.redis.common.RedisListDto;
-import com.redis.common.RedisStringDto;
+import com.redis.dto.RedisHashDto;
+import com.redis.dto.RedisListDto;
+import com.redis.dto.RedisStringDto;
 import com.redis.service.RedisService;
 
 @Service("RedisService")
-public class RedisServiceImp implements RedisService{
+public class RedisServiceImp implements RedisService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(RedisServiceImp.class);
-	
-	@Autowired
-	private RedisTemplate<String, Object> redisTemplate;
-	
-	@Override
-	public void setString(RedisStringDto redisStringDto) throws Exception {
-		LOGGER.debug(redisStringDto.toString());
-		redisTemplate.opsForValue().set(redisStringDto.getKey(), redisStringDto.getVal(), 3600, TimeUnit.SECONDS);
-	}
+    private static final Logger LOGGER = LoggerFactory.getLogger(RedisServiceImp.class);
 
-	@Override
-	public String getString(String key) throws Exception {
-		LOGGER.debug(key);
-		return redisTemplate.opsForValue().get(key).toString();
-	}
+    private RedisTemplate<String, Object> redisTemplate;
+
+    @Autowired
+    public RedisServiceImp(RedisTemplate<String, Object> redisTemplate) {
+    	this.redisTemplate = redisTemplate;
+    }
+   
+    @Override
+    public void setString(RedisStringDto redisStringDto) throws Exception {
+    	LOGGER.debug(redisStringDto.toString());
+    	LOGGER.debug(redisTemplate.opsForValue()+"123");
+    	redisTemplate.opsForValue().set(redisStringDto.getKey(), redisStringDto.getVal(), 3600, TimeUnit.SECONDS);
+    }
+
+    @Override
+    public String getString(String key) throws Exception {
+    	LOGGER.debug(key);
+    	return redisTemplate.opsForValue().get(key).toString();
+    }
 
 	@Override
 	public void setList(RedisListDto redisListDto) throws Exception {

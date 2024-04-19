@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.redis.common.RedisAttr;
-import com.redis.common.RedisHashDto;
-import com.redis.common.RedisListDto;
-import com.redis.common.RedisStringDto;
+import com.redis.dto.RedisHashDto;
+import com.redis.dto.RedisListDto;
+import com.redis.dto.RedisStringDto;
 import com.redis.service.RedisService;
 
 @RestController

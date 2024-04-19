@@ -2,9 +2,9 @@ package com.redis.service;
 
 import java.util.List;
 
-import com.redis.common.RedisHashDto;
-import com.redis.common.RedisListDto;
-import com.redis.common.RedisStringDto;
+import com.redis.dto.RedisHashDto;
+import com.redis.dto.RedisListDto;
+import com.redis.dto.RedisStringDto;
 
 public interface RedisService {
 	

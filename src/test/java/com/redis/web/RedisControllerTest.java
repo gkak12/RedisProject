@@ -25,12 +25,13 @@ import com.redis.service.RedisService;
 @WebMvcTest(controllers=RedisController.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class RedisControllerTest {
+	
 	private static final Logger LOGGER = LoggerFactory.getLogger(RedisControllerTest.class);
 
 	@Autowired
 	private MockMvc mockMvc;
 	
-	@MockBean(name="RedisServiceImp")
+	@MockBean(name="RedisService")
 	private RedisService redisService;
 	
 	@Test
@@ -52,7 +53,7 @@ class RedisControllerTest {
 						assertTrue(res.contains(RedisAttr.SUCCESS.normalCase()));
 					});
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.debug(e.toString());
 		}
 	}
 
@@ -74,7 +75,7 @@ class RedisControllerTest {
 						assertTrue(res.contains(RedisAttr.SUCCESS.normalCase()));
 					});
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.debug(e.toString());
 		}
 	}
 	
@@ -97,7 +98,7 @@ class RedisControllerTest {
 						assertTrue(res.contains(RedisAttr.SUCCESS.normalCase()));
 					});
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.debug(e.toString());
 		}
 	}
 
@@ -119,7 +120,7 @@ class RedisControllerTest {
 						assertTrue(res.contains(RedisAttr.SUCCESS.normalCase()));
 					});
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.debug(e.toString());
 		}
 	}
 	
@@ -142,7 +143,7 @@ class RedisControllerTest {
 						assertTrue(res.contains(RedisAttr.SUCCESS.normalCase()));
 					});
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.debug(e.toString());
 		}
 	}
 
@@ -165,7 +166,7 @@ class RedisControllerTest {
 						assertTrue(res.contains(RedisAttr.SUCCESS.normalCase()));
 					});
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.debug(e.toString());
 		}
 	}
 }

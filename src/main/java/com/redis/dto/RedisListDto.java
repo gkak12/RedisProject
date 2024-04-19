@@ -1,4 +1,4 @@
-package com.redis.common;
+package com.redis.dto;
 
 import java.util.List;
 
@@ -10,5 +10,5 @@ import lombok.Data;
 public class RedisListDto {
 
 	private String key;
-	private List<Object> list;
+	private List<String> list;
 }

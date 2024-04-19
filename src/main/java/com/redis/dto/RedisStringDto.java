@@ -1,4 +1,4 @@
-package com.redis.common;
+package com.redis.dto;
 
 import lombok.Builder;
 import lombok.Data;
