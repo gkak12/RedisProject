@@ -10,5 +10,5 @@ import lombok.Data;
 public class RedisListDto {
 
 	private String key;
-	private List<String> list;
+	private List<Object> list;
 }

@@ -27,40 +27,40 @@ public class RedisServiceImp implements RedisService {
     }
    
     @Override
-    public void setString(RedisStringDto redisStringDto) throws Exception {
+    public void setString(RedisStringDto redisStringDto) {
     	LOGGER.debug(redisStringDto.toString());
-    	LOGGER.debug(redisTemplate.opsForValue()+"123");
     	redisTemplate.opsForValue().set(redisStringDto.getKey(), redisStringDto.getVal(), 3600, TimeUnit.SECONDS);
     }
 
     @Override
-    public String getString(String key) throws Exception {
+    public String getString(String key) {
     	LOGGER.debug(key);
     	return redisTemplate.opsForValue().get(key).toString();
     }
 
 	@Override
-	public void setList(RedisListDto redisListDto) throws Exception {
+	public void setList(RedisListDto redisListDto) {
 		LOGGER.debug(redisListDto.toString());
+		
 		redisTemplate.opsForList().rightPushAll(redisListDto.getKey(), redisListDto.getList());
 		redisTemplate.expire(redisListDto.getKey(), 3600, TimeUnit.SECONDS);
 	}
 
 	@Override
-	public List<Object> getList(String key) throws Exception {
+	public List<Object> getList(String key) {
 		LOGGER.debug(key);
 		return redisTemplate.opsForList().range(key, 0, -1);
 	}
 
 	@Override
-	public void setHash(RedisHashDto redisHashDto) throws Exception {
+	public void setHash(RedisHashDto redisHashDto) {
 		LOGGER.debug(redisHashDto.toString());
 		redisTemplate.opsForHash().put(redisHashDto.getKey(), redisHashDto.getHashKey(), redisHashDto.getHashVal());
 		redisTemplate.expire(redisHashDto.getKey(), 3600, TimeUnit.SECONDS);
 	}
 
 	@Override
-	public String getHash(RedisHashDto redisHashDto) throws Exception {
+	public String getHash(RedisHashDto redisHashDto) {
 		LOGGER.debug(redisHashDto.toString());
 		return redisTemplate.opsForHash().get(redisHashDto.getKey(), redisHashDto.getHashKey()).toString();
 	}

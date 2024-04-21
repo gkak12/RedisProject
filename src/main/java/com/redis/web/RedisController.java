@@ -1,13 +1,14 @@
 package com.redis.web;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,107 +30,65 @@ public class RedisController {
 	private RedisService redisService;
 	
 	@PostMapping(value = "/setString")
-	public Map<RedisAttr, String> setString(@RequestBody RedisStringDto redisStringDto){
+	public ResponseEntity<Void> setString(@RequestBody RedisStringDto redisStringDto) {
 		LOGGER.debug(redisStringDto.toString());
-		Map<RedisAttr, String> res = new HashMap<RedisAttr, String>();
 		
-		try {
-			redisService.setString(redisStringDto);
-			res.put(RedisAttr.RESULT, RedisAttr.SUCCESS.normalCase());
-		} catch (Exception e) {
-			LOGGER.debug(e.toString());
-			res.put(RedisAttr.MSG, e.toString());
-			res.put(RedisAttr.RESULT, RedisAttr.FAIL.normalCase());
-		}
-		
-		return res;
+		redisService.setString(redisStringDto);
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
 	@GetMapping(value = "/getString")
-	public Map<RedisAttr, String> getString(@RequestParam(value = "key", required = true) String key){
+	public ResponseEntity<String> getString(@RequestParam(value = "key", required = true) String key){
 		LOGGER.debug(key);
-		Map<RedisAttr, String> res = new HashMap<RedisAttr, String>();
 		
-		try {
-			String val = redisService.getString(key);
-			res.put(RedisAttr.STRING, val);
-			res.put(RedisAttr.RESULT, RedisAttr.SUCCESS.normalCase());
-		} catch (Exception e) {
-			LOGGER.debug(e.toString());
-			res.put(RedisAttr.MSG, e.toString());
-			res.put(RedisAttr.RESULT, RedisAttr.FAIL.normalCase());
-		}
+		String val = redisService.getString(key);
 		
-		return res;
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put(RedisAttr.RESULT.normalCase(), RedisAttr.SUCCESS.normalCase());
+		jsonObject.put(RedisAttr.STRING.normalCase(), val);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(jsonObject.toString());
 	}
 	
 	@PostMapping(value = "/setList")
-	public Map<RedisAttr, String> setList(@RequestBody RedisListDto redisListDto){
+	public ResponseEntity<Void> setList(@RequestBody RedisListDto redisListDto){
 		LOGGER.debug(redisListDto.toString());
-		Map<RedisAttr, String> res = new HashMap<RedisAttr, String>();
 		
-		try {
-			redisService.setList(redisListDto);
-			res.put(RedisAttr.RESULT, RedisAttr.SUCCESS.normalCase());
-		} catch (Exception e) {
-			LOGGER.debug(e.toString());
-			res.put(RedisAttr.MSG, e.toString());
-			res.put(RedisAttr.RESULT, RedisAttr.FAIL.normalCase());
-		}
-		
-		return res;
+		redisService.setList(redisListDto);
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
 	@GetMapping(value = "/getList")
-	public Map<RedisAttr, Object> getList(@RequestParam(value="key", required = true) String key){
+	public ResponseEntity<String> getList(@RequestParam(value="key", required = true) String key){
 		LOGGER.debug(key);
-		Map<RedisAttr, Object> res = new HashMap<RedisAttr, Object>();
 		
-		try {
-			List<Object> list = redisService.getList(key);
-			res.put(RedisAttr.LIST, list);
-			res.put(RedisAttr.RESULT, RedisAttr.SUCCESS.normalCase());
-		} catch (Exception e) {
-			LOGGER.debug(e.toString());
-			res.put(RedisAttr.MSG, e.toString());
-			res.put(RedisAttr.RESULT, RedisAttr.FAIL.normalCase());
-		}
+		List<Object> list = redisService.getList(key);
 		
-		return res;
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put(RedisAttr.RESULT.normalCase(), RedisAttr.SUCCESS.normalCase());
+		jsonObject.put(RedisAttr.LIST.normalCase(), list);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(jsonObject.toString());
 	}
 	
 	@PostMapping(value = "/setHash")
-	public Map<RedisAttr, String> setHash(@RequestBody RedisHashDto redisHashDto){
+	public ResponseEntity<Void> setHash(@RequestBody RedisHashDto redisHashDto){
 		LOGGER.debug(redisHashDto.toString());
-		Map<RedisAttr, String> res = new HashMap<RedisAttr, String>();
 		
-		try {
-			redisService.setHash(redisHashDto);
-			res.put(RedisAttr.RESULT, RedisAttr.SUCCESS.normalCase());
-		} catch (Exception e) {
-			LOGGER.debug(e.toString());
-			res.put(RedisAttr.MSG, e.toString());
-			res.put(RedisAttr.RESULT, RedisAttr.FAIL.normalCase());
-		}
-		
-		return res;
+		redisService.setHash(redisHashDto);
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
 	@GetMapping(value = "/getHash")
-	public Map<RedisAttr, String> getHash(@RequestBody RedisHashDto redisHashDto){
+	public ResponseEntity<String> getHash(@RequestBody RedisHashDto redisHashDto){
 		LOGGER.debug(redisHashDto.toString());
-		Map<RedisAttr, String> res = new HashMap<RedisAttr, String>();
 		
-		try {
-			String val = redisService.getHash(redisHashDto);
-			res.put(RedisAttr.STRING, val);
-			res.put(RedisAttr.RESULT, RedisAttr.SUCCESS.normalCase());
-		} catch (Exception e) {
-			LOGGER.debug(e.toString());
-			res.put(RedisAttr.MSG, e.toString());
-			res.put(RedisAttr.RESULT, RedisAttr.FAIL.normalCase());
-		}
+		String val = redisService.getHash(redisHashDto);
 		
-		return res;
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put(RedisAttr.RESULT.normalCase(), RedisAttr.SUCCESS.normalCase());
+		jsonObject.put(RedisAttr.STRING.normalCase(), val);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(jsonObject.toString());
 	}
 }

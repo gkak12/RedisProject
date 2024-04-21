@@ -11,45 +11,39 @@ public interface RedisService {
 	/**
 	 * 문자열 저장
 	 * @param redisStringDto
-	 * @throws Exception
 	 */
-	public void setString(RedisStringDto redisStringDto) throws Exception;
+	public void setString(RedisStringDto redisStringDto);
 	
 	/**
 	 * 문자열 조회
 	 * @param key
 	 * @return
-	 * @throws Exception
 	 */
-	public String getString(String key) throws Exception;
+	public String getString(String key);
 	
 	/**
 	 * 리스트 저장
 	 * @param redisListDto
-	 * @throws Exception
 	 */
-	public void setList(RedisListDto redisListDto) throws Exception;
+	public void setList(RedisListDto redisListDto);
 	
 	/**
 	 * 리스트 조회
 	 * @param key
 	 * @return
-	 * @throws Exception
 	 */
-	public List<Object> getList(String key) throws Exception;
+	public List<Object> getList(String key);
 	
 	/**
 	 * 해시 저장
 	 * @param redisHashDto
-	 * @throws Exception
 	 */
-	public void setHash(RedisHashDto redisHashDto) throws Exception;
+	public void setHash(RedisHashDto redisHashDto);
 	
 	/**
 	 * 해시 조회
 	 * @param redisHashDto
 	 * @return
-	 * @throws Exception
 	 */
-	public String getHash(RedisHashDto redisHashDto) throws Exception;
+	public String getHash(RedisHashDto redisHashDto);
 }

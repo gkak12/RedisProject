@@ -1,5 +1,6 @@
 package com.redis.web;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.MethodOrderer;
@@ -37,20 +38,21 @@ class RedisControllerTest {
 	@Test
 	@Order(1)
 	public void redis_문자열_저장_테스트() {
+		int expRes = 201;
+		
 		String url = "/setString";
 		String redisString = "{\"key\": \"testString\", \"val\":\"redis test string value\"}";
 		
 		try {
 			mockMvc.perform(MockMvcRequestBuilders
-							.post(url)
-							.contentType(MediaType.APPLICATION_JSON_VALUE)
-							.content(redisString))
+								.post(url)
+								.contentType(MediaType.APPLICATION_JSON_VALUE)
+								.content(redisString))
 					.andExpect(result -> {
 						MockHttpServletResponse response = result.getResponse();
-						String res = response.getContentAsString();
 						
-						LOGGER.debug(res);
-						assertTrue(res.contains(RedisAttr.SUCCESS.normalCase()));
+						LOGGER.debug("status: " + response.getStatus());
+						assertEquals(expRes, response.getStatus());
 					});
 		} catch (Exception e) {
 			LOGGER.debug(e.toString());
@@ -65,8 +67,8 @@ class RedisControllerTest {
 		
 		try {
 			mockMvc.perform(MockMvcRequestBuilders
-							.get(sb.toString())
-							.contentType(MediaType.APPLICATION_JSON_VALUE))
+								.get(sb.toString())
+								.contentType(MediaType.APPLICATION_JSON_VALUE))
 					.andExpect(result -> {
 						MockHttpServletResponse response = result.getResponse();
 						String res = response.getContentAsString();
@@ -82,6 +84,8 @@ class RedisControllerTest {
 	@Test
 	@Order(3)
 	public void redis_리스트_저장_테스트() {
+		int expRes = 201;
+		
 		String url = "/setList";
 		String redisList = "{\"key\": \"testList\", \"list\":[\"item\", \"item2\", \"item3\", \"item4\", \"item5\"]}";
 		
@@ -92,10 +96,9 @@ class RedisControllerTest {
 							.content(redisList))
 					.andExpect(result -> {
 						MockHttpServletResponse response = result.getResponse();
-						String res = response.getContentAsString();
 						
-						LOGGER.debug(res);
-						assertTrue(res.contains(RedisAttr.SUCCESS.normalCase()));
+						LOGGER.debug("status: " + response.getStatus());
+						assertEquals(expRes, response.getStatus());
 					});
 		} catch (Exception e) {
 			LOGGER.debug(e.toString());
@@ -127,6 +130,8 @@ class RedisControllerTest {
 	@Test
 	@Order(5)
 	public void redis_해시_저장_테스트() {
+		int expRes = 201;
+		
 		String url = "/setHash";
 		String redisHash = "{\"key\": \"testHash\", \"hashKey\": \"hash_test_key\", \"hashVal\": \"hast test value\"}";
 		
@@ -137,10 +142,9 @@ class RedisControllerTest {
 							.content(redisHash))
 					.andExpect(result -> {
 						MockHttpServletResponse response = result.getResponse();
-						String res = response.getContentAsString();
 						
-						LOGGER.debug(res);
-						assertTrue(res.contains(RedisAttr.SUCCESS.normalCase()));
+						LOGGER.debug("status: " + response.getStatus());
+						assertEquals(expRes, response.getStatus());
 					});
 		} catch (Exception e) {
 			LOGGER.debug(e.toString());
