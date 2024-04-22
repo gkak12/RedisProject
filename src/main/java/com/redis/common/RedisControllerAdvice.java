@@ -1,6 +1,6 @@
 package com.redis.common;
 
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.RedisConnectionFailureException;
@@ -14,6 +14,7 @@ public class RedisControllerAdvice {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(RedisControllerAdvice.class);
 
+	@SuppressWarnings("unchecked")
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<JSONObject> handleException(Exception e) {
 		LOGGER.debug(e.toString());
@@ -27,6 +28,7 @@ public class RedisControllerAdvice {
 				.body(jsonObject);
     }
 	
+	@SuppressWarnings("unchecked")
 	@ExceptionHandler(RedisConnectionFailureException.class)
 	public ResponseEntity<JSONObject> handleRedisConnectionException(RedisConnectionFailureException e){
 		LOGGER.debug(e.toString());

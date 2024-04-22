@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -37,6 +37,7 @@ public class RedisController {
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@GetMapping(value = "/getString")
 	public ResponseEntity<String> getString(@RequestParam(value = "key", required = true) String key){
 		LOGGER.debug(key);
@@ -58,6 +59,7 @@ public class RedisController {
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@GetMapping(value = "/getList")
 	public ResponseEntity<String> getList(@RequestParam(value="key", required = true) String key){
 		LOGGER.debug(key);
@@ -79,6 +81,7 @@ public class RedisController {
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@GetMapping(value = "/getHash")
 	public ResponseEntity<String> getHash(@RequestBody RedisHashDto redisHashDto){
 		LOGGER.debug(redisHashDto.toString());
